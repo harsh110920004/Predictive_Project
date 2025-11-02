@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Carbon Prediction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .nav-links {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .best-model {
+            background-color: #d4edda !important;
+            font-weight: bold;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .metric-card h2 {
+            font-size: 2.5em;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Model Performance Dashboard</h1>
+        
+        <div class="nav-links">
+            <a href="/">Home</a> | 
+            <a href="/dashboard">Dashboard</a> | 
+            <a href="/api/models" target="_blank">API</a>
+        </div>
+        
+        {% if results %}
+        <div class="metric-card">
+            <h3>Best Model</h3>
+            <h2>{{ results.best_model }}</h2>
+            <p>R² Score: {{ "%.4f"|format(results.best_metrics.r2) }} | RMSE: {{ "%.2f"|format(results.best_metrics.rmse) }}</p>
+        </div>
+        
+        <h2>Model Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>RMSE</th>
+                    <th>MAE</th>
+                    <th>R² Score</th>
+                    <th>MAPE (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for model in results.comparison %}
+                <tr {% if model.Model == results.best_model %}class="best-model"{% endif %}>
+                    <td>{{ model.Model }}</td>
+                    <td>{{ "%.2f"|format(model.RMSE) }}</td>
+                    <td>{{ "%.2f"|format(model.MAE) }}</td>
+                    <td>{{ "%.4f"|format(model['R²']) }}</td>
+                    <td>{{ "%.2f"|format(model.MAPE) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No model results available. Train models first.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

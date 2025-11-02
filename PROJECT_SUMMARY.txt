@@ -1,0 +1,20 @@
+PROJECT SUMMARY
+===============
+
+Generated: 2025-10-21 01:31:15
+
+Dataset: 1000 records
+Features: 12
+Target: Carbon Emissions
+
+Best Model: Gradient Boosting
+R2 Score: 0.9804
+RMSE: 92.29
+
+Files Generated:
+- PROJECT_REPORT.md - Full detailed report
+- All trained models in models/saved_models/
+- Visualizations in reports/figures/
+- Model comparison results in models/model_comparison_results.json
+
+Status: COMPLETED SUCCESSFULLY

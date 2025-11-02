@@ -1,0 +1,59 @@
+# Configuration for Carbon Footprint Prediction System
+
+data:
+  raw_data_path: "data/raw/supply_chain_emissions.csv"
+  processed_data_path: "data/processed/cleaned_emissions.csv"
+  test_size: 0.2
+  validation_size: 0.1
+  random_state: 42
+
+preprocessing:
+  handle_missing: "interpolate"  # Options: drop, mean, median, interpolate
+  outlier_method: "iqr"  # Options: iqr, zscore
+  outlier_threshold: 1.5
+  scaling_method: "standard"  # Options: standard, minmax, robust
+
+feature_engineering:
+  create_time_features: true
+  create_lag_features: true
+  lag_periods: [1, 3, 7, 30]
+  create_rolling_features: true
+  rolling_windows: [7, 14, 30]
+
+models:
+  logistic_regression:
+    solver: "lbfgs"
+    max_iter: 1000
+    C: 1.0
+  
+  poisson_regression:
+    alpha: 1.0
+    max_iter: 1000
+  
+  arima:
+    order: [1, 1, 1]
+    seasonal_order: [1, 1, 1, 12]
+  
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 5
+  
+  xgboost:
+    n_estimators: 100
+    learning_rate: 0.1
+    max_depth: 6
+
+evaluation:
+  metrics: ["rmse", "mae", "r2", "mape"]
+  cross_validation_folds: 5
+
+visualization:
+  plot_style: "seaborn"
+  figure_size: [12, 6]
+  dpi: 300
+
+app:
+  host: "0.0.0.0"
+  port: 5000
+  debug: true
