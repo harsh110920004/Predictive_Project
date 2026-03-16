@@ -189,5 +189,5 @@ print(f"   • Training Samples: {len(X_train)}")
 print(f"   • Test Accuracy: {accuracy*100:.2f}%")
 print(f"   • AUC-ROC Score: {auc_score:.4f}")
 print(f"   • Cross-Val Accuracy: {cv_scores.mean()*100:.2f}% ± {cv_scores.std()*200:.2f}%")
-print("\n✅ Model is ready for predictions!")
+print("\n Model is ready for predictions!")
 

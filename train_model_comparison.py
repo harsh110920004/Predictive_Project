@@ -137,7 +137,7 @@ best_rmse = results_df.iloc[0]['RMSE']
 best_r2 = results_df.iloc[0]['R²']
 
 print("\n" + "="*70)
-print(f"🏆 BEST MODEL: {best_model_name}")
+print(f"BEST MODEL: {best_model_name}")
 print(f"   • RMSE: {best_rmse:.2f}")
 print(f"   • R²: {best_r2:.4f}")
 print("="*70)
@@ -300,7 +300,7 @@ print("\n" + "="*70)
 print("✓ MODEL EVALUATION COMPLETED SUCCESSFULLY!")
 print("="*70)
 
-print("\n📊 FINAL SUMMARY:")
+print("\n FINAL SUMMARY:")
 print(f"   • Total Models Trained: {len(models)}")
 print(f"   • Best Model: {best_model_name}")
 print(f"   • Best RMSE: {best_rmse:.2f}")
@@ -313,5 +313,5 @@ print("   • models/saved_models/best_model.pkl")
 print("   • models/saved_models/regression_scaler.pkl")
 print("   • models/model_comparison_results.json")
 
-print("\n✅ All models are ready for production use!")
+print("\n All models are ready for production use!")
 print("="*70)
